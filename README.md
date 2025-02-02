@@ -1,6 +1,6 @@
 # Lyinggods Token Range Bands
 
-Creates range bands around the selected token using the token HUD based on the range band system Fantasy Flight Games / Edge's Star Wars and Genesys RPGs
+Creates range bands around the selected token using the token HUD based on the range band system used in Fantasy Flight Games / Edge's Star Wars and Genesys RPGs
 
 
 https://github.com/user-attachments/assets/69ab8833-7fb7-46d8-bc7d-9d296b002be4
