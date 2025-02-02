@@ -1,18 +1,40 @@
 {
-  "name": "lgs-token-range-bands",
+  "id": "lgs-token-range-bands",
   "title": "FFG Token Range Bands",
   "description": "Adds a adjustible radius circle icon to tokens that toggles range bands around the token",
   "version": "1.0.0",
-  "author": "Your Name",
-  "minimumCoreVersion": "11",
-  "compatibleCoreVersion": "12",
-  "scripts": [
-    "scripts/lgs-token-range-bands.js"
+  "authors": [
+    {
+      "name": "Lyinggod",
+      "url": "https://github.com/Lyinggod"
+    }
   ],
-  "esmodules": [],
-  "styles": [],
-  "packs": [],
-  "manifest": "https://raw.githubusercontent.com/YourRepo/lgs-token-range-bands/main/module.json",
-  "download": "https://raw.githubusercontent.com/YourRepo/lgs-token-range-bands/main/module.js",
-  "license": "MIT"
+  "compatibility": {
+    "foundry": {
+      "minimum": "12",
+      "maximum": "12"
+    }
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "starwarsffg",
+        "type": "system",
+        "manifest": "https://raw.githubusercontent.com/StarWarsFoundryVTT/StarWarsFFG/master/system.json",
+        "compatibility": {
+          "minimum": "1.901",
+          "verified": "1.905"
+        }
+      }
+    ],
+    "requires": [],
+    "recommends": [],
+    "conflicts": []
+  },
+  "esmodules": ["scripts/lgs-token-range-bands.js"],
+  "languages": [],
+  "manifest": "https://github.com/Lyinggod/lgs-token-range-bands/releases/download/v1.0.0/module.json",
+  "download": "https://github.com/Lyinggod/lgs-token-range-bands/releases/download/v1.0.0/lgs-token-range-bands.zip",
+  "url": "https://github.com/Lyinggod/lgs-token-range-bands",
+  "readme": "https://github.com/Lyinggod/lgs-token-range-bands/blob/main/README.md"
 }
