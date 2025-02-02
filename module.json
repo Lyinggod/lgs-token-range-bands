@@ -1,0 +1,18 @@
+{
+  "name": "lgs-token-range-bands",
+  "title": "FFG Token Range Bands",
+  "description": "Adds a adjustible radius circle icon to tokens that toggles range bands around the token",
+  "version": "1.0.0",
+  "author": "Your Name",
+  "minimumCoreVersion": "11",
+  "compatibleCoreVersion": "12",
+  "scripts": [
+    "scripts/lgs-token-range-bands.js"
+  ],
+  "esmodules": [],
+  "styles": [],
+  "packs": [],
+  "manifest": "https://raw.githubusercontent.com/YourRepo/lgs-token-range-bands/main/module.json",
+  "download": "https://raw.githubusercontent.com/YourRepo/lgs-token-range-bands/main/module.js",
+  "license": "MIT"
+}

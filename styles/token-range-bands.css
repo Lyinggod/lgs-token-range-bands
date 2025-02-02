@@ -1,0 +1,4 @@
+/* Style adjustments for context menu icons */
+#context-menu .fas.fa-circle {
+  color: #4caf50; /* Green circle icon for visual clarity */
+}
