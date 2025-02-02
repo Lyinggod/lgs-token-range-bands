@@ -9,7 +9,7 @@ https://github.com/user-attachments/assets/69ab8833-7fb7-46d8-bc7d-9d296b002be4
 
 
 
-Ring size is defined in custom settings. Larger values will make the rings larger in size
+Ring size is defined in custom settings. Larger values will make the rings larger in size. A size of approximately 5 is recommended.
 
 <img src="https://github.com/user-attachments/assets/e4f7e915-7712-4a30-9f0d-636062f9590e" size=400>
 
