@@ -15,16 +15,14 @@ Drag Rule Approximation applies to the drag ruler and how distance is counted in
 
 <img src="https://github.com/user-attachments/assets/bd21f4c0-0fe3-44cf-bd8d-e75792d8d7c9" width=200>
 
+<p>
+    <img src="https://github.com/user-attachments/assets/12d52339-04fd-4ca6-b1a6-77104028d63e" width="200" />
+</p>
 
-### Scene Configureation
-
-<img scr="https://github.com/user-attachments/assets/fc333eda-63f9-4f0a-b86a-ae7303dd9c3d" width=200> 
-
-iasdf
-
-![image](https://github.com/user-attachments/assets/12d52339-04fd-4ca6-b1a6-77104028d63e)
+### Scene Configuration
 
 
+![image](https://github.com/user-attachments/assets/5b2fcf25-4375-4af3-9572-be8d48560a65)
 
 
 The _Range Band Multiplier_ is used to change the size of the range bands on a per scene basis depending on the scale of the map. It may need to be adjusted for each map.
