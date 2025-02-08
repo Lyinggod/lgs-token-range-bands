@@ -1,7 +1,15 @@
 # Lyinggods Token Range Bands and Narrative Drag Ruler
 
 ## Token Range Bands
+
 Creates range bands around the selected token using the token HUD. 
+
+### Activating Range Bands
+
+![activate range bands](https://github.com/user-attachments/assets/359f8b4d-332b-4340-b104-49395c49702c)
+
+
+### Configuring Range Bands
 
 Range Bands are configured in _Configure Settings_.
 
