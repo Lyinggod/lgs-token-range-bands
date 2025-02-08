@@ -18,7 +18,8 @@ _Drag Rule Approximation_ applies on to scenes with grid type _Square_. By defau
 <img src="https://github.com/user-attachments/assets/bd21f4c0-0fe3-44cf-bd8d-e75792d8d7c9" width=200>
 
 <p>
-    <img src="https://github.com/user-attachments/assets/12d52339-04fd-4ca6-b1a6-77104028d63e" width="200" /><br>
+    <img src="https://github.com/user-attachments/assets/40a6f037-7bc7-4255-8cd2-a34035a2b130" width="300" /> 
+    <br>
     <i>Drag Rule Approximation</i> disabled. Notice that in both pictures, 3 square are counted but in the lower image, <i>Short Range</i> is well outside the circle for the same number of feet measured.
 </p>
 
