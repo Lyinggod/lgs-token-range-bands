@@ -15,5 +15,5 @@ Ring size is defined in custom settings. Larger values will make the rings large
 
  ###
 
-This module is based on the code by _Leogar_ on the Foundry Vtt Discord Server.
+This module is based on the code by _Leogar_ on the Foundry VTT Discord Server.
 

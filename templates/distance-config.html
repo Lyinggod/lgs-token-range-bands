@@ -1,0 +1,27 @@
+<form>
+  <div class="form-group">
+    <div class="distance-rows">
+       <div class="distance-row" style="padding-left:20px; cursor: move; margin-bottom: 5px;">
+         <span><b>Range Name</b></span>
+         <span style="padding-left:219px"><b>Relative Range Distance</b></span><br>
+       </div>
+      {{#each distances}}
+        <div class="distance-row" style="padding-left:20px; cursor: move; margin-bottom: 5px;">
+          <input type="text" name="name" placeholder="Name" value="{{this.name}}" style="width:291px; margin-right:5px;">
+          <input type="number" name="distance" placeholder="Distance" value="{{this.distance}}" style="width:146px; margin-right:5px;">
+          <i class="fas fa-trash remove-row" style="cursor:pointer;"></i>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  <ul>
+	  <li>Rows can be re-ordered by drag and drop. Order is for organizational purposes and has no effect on measurements.</li>
+	  <li>Range distance is a relative distance from each range band template to the next. The actual distance is determined by multiplying this value against the Size Mulitplier in each scene. Once these values are set, the size multiplier should be the value changed to determine size of range bands.</li>
+	  </ul>
+
+  <div style="margin-top: 10px;">
+    <button type="button" class="add-row" style="width:137px">Add</button>
+    <button type="button" class="reset-ranges" style="width:198px">Set Default Range Bands</button>
+    <button type="submit" style="width:137px">Save</button>
+  </div>
+</form>

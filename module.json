@@ -1,40 +1,42 @@
 {
   "id": "lgs-token-range-bands",
-  "title": "FFG Token Range Bands",
-  "description": "Adds a adjustible radius circle icon to tokens that toggles range bands around the token",
-  "version": "1.0.0",
+  "name": "lgs-token-range-bands",
+  "title": "Lyinggods Token Range Bands",
+  "description": "Supports abstracted ranges such as Close, Short, Far, etc in fiddly numbers in feet or metres.",
+  "version": "1.1.1",
   "authors": [
     {
       "name": "Lyinggod",
-      "url": "https://github.com/Lyinggod"
+	  "url": "https://github.com/Lyinggod"
     }
   ],
   "compatibility": {
-    "foundry": {
-      "minimum": "12",
-      "maximum": "12"
-    }
+    "minimum": "12.0.0",
+    "verified": "12.999",
+    "maximum": "12.999"
   },
-  "relationships": {
-    "systems": [
-      {
-        "id": "starwarsffg",
-        "type": "system",
-        "manifest": "https://raw.githubusercontent.com/StarWarsFoundryVTT/StarWarsFFG/master/system.json",
-        "compatibility": {
-          "minimum": "1.901",
-          "verified": "1.905"
-        }
+  "systems": [
+    {
+      "id": "starwarsffg",
+      "manifest": "https://path-to-starwarsffg-system/module.json",
+      "compatibility": {
+        "minimum": "1.8",
+        "verified": "1.8"
       }
-    ],
-    "requires": [],
-    "recommends": [],
-    "conflicts": []
+    }
+  ],
+  "relationships": {
+    "requires": [
+      {
+        "id": "lib-wrapper",
+        "type": "module"
+      }
+    ]
   },
-  "esmodules": ["scripts/lgs-token-range-bands.js"],
+ "esmodules": ["scripts/lgs-token-range-bands.js"],
   "languages": [],
-  "manifest": "https://github.com/Lyinggod/lgs-token-range-bands/releases/download/v1.0.0/module.json",
-  "download": "https://github.com/Lyinggod/lgs-token-range-bands/releases/download/v1.0.0/lgs-token-range-bands.zip",
+  "manifest": "https://github.com/Lyinggod/lgs-token-range-bands/releases/download/v1.1.1/module.json",
+  "download": "https://github.com/Lyinggod/lgs-token-range-bands/releases/download/v1.1.1/lgs-token-range-bands.zip",
   "url": "https://github.com/Lyinggod/lgs-token-range-bands",
   "readme": "https://github.com/Lyinggod/lgs-token-range-bands/blob/main/README.md"
 }
