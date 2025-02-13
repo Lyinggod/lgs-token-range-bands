@@ -2,8 +2,8 @@
   "id": "lgs-token-range-bands",
   "name": "lgs-token-range-bands",
   "title": "Lyinggods Token Range Bands",
-  "description": "Supports abstracted ranges such as Close, Short, Far, etc in fiddly numbers in feet or metres.",
-  "version": "1.1.1",
+  "description": "Supports abstracted ranges such as Close, Short, Far, etc instead fiddly numbers in feet or meters.",
+  "version": "1.1.2",
   "authors": [
     {
       "name": "Lyinggod",
@@ -25,6 +25,7 @@
       }
     }
   ],
+  "socket": true,
   "relationships": {
     "requires": [
       {

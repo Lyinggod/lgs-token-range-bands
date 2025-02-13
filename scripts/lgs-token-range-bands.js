@@ -50,6 +50,38 @@ Hooks.once("init", () => {
     default: false
   });
 
+  // ----------------- Socket Integration -----------------
+  // All multiplier changes are sent via socket so that there is one authoritative update.
+  game.socket.on("module.lgs-token-range-bands", async (data) => {
+    // (Avoid processing our own socket message.)
+    if (data.senderId === game.user.id) return;
+
+    if (data.action === "updateMultiplier") {
+      const scene = game.scenes.get(data.sceneId);
+      if (!scene) return;
+      // Only the GM with update permission (typically the scene owner) is allowed to update the scene flag.
+      if (scene.testUserPermission(game.user, "UPDATE")) {
+        await scene.setFlag("lgs-token-range-bands", "rangeBandMultiplier", data.multiplier);
+        ui.notifications.info(`Range Band Multiplier updated to ${data.multiplier} via socket.`);
+        // After updating the flag, broadcast a message so that every client forces a refresh.
+        game.socket.emit("module.lgs-token-range-bands", {
+          action: "multiplierUpdated",
+          multiplier: data.multiplier,
+          sceneId: data.sceneId,
+          senderId: game.user.id
+        });
+      }
+    }
+    // When multiplierUpdated is received, force a redraw of the scene so that measured templates (and drag ruler) re-read the flag.
+    else if (data.action === "multiplierUpdated") {
+      if (canvas.scene && canvas.scene.id === data.sceneId) {
+        // A redraw causes the range bands to be recalculated on next use.
+        canvas.draw();
+      }
+    }
+  });
+  // --------------------------------------------------------
+
   // Wrap the ruler’s segment label function so that the configured ranges are multiplied
   // by the scene’s rangeBandMultiplier flag.
   libWrapper.register(
@@ -108,7 +140,7 @@ Hooks.once("init", () => {
       
       // set color if range exceeded
       if (narrativeLabel == "Range Exceeded" ) {
-        args[0].label._tintRGB = 721024 ; // dark red
+        args[0].label._tintRGB = 721024; // dark red
         narrativeLabel = exceedsRangeMessage;
       } else {
         args[0].label._tintRGB = 16777215;  // white
@@ -268,7 +300,7 @@ Hooks.on("renderSceneConfig", (app, html, data) => {
     // Create the field for Range Band Multiplier.
     const rangeBandMultiplierDiv = $(`
       <hr>
-      <b>Configure Narrative Drag Ruler</b><br>	  
+      <b>Configure Narrative Drag Ruler</b><br>      
       <div style="flex:none; font-size:10px"><i>Recommend grid type of <i>Gridless</i> for range bands and narrative drag ruler<br></div>
       <div class="form-group">
         <label>Range Band Multiplier</label>
@@ -293,6 +325,23 @@ Hooks.on("renderSceneConfig", (app, html, data) => {
     `);
 
     gridTab.append(measurementOptionDiv);
+
+    // ----------------- Always use socket-based update -----------------
+    // Regardless of whether the current GM has update permission, any change
+    // to the multiplier input sends a socket event so that the designated GM
+    // (scene owner) can update the flag.
+    rangeBandMultiplierDiv.find('input[name="flags.lgs-token-range-bands.rangeBandMultiplier"]').on('change', function(ev) {
+      ev.preventDefault();
+      const newMultiplier = Number($(this).val());
+      game.socket.emit("module.lgs-token-range-bands", {
+        action: "updateMultiplier",
+        multiplier: newMultiplier,
+        sceneId: app.object.id,
+        senderId: game.user.id
+      });
+      //ui.notifications.info("Requested update to Range Band Multiplier via socket.");
+    });
+    // -------------------------------------------------------------------------
   }
 });
 
