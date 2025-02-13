@@ -1,5 +1,7 @@
 # Lyinggods Token Range Bands and Narrative Drag Ruler
 
+This modules creates range bands and modifies the drag ruler to support abstracted range bands such as far, close, medium, etc instead of dealing with fiddly feet or meters.
+
 ## Token Range Bands
 
 Creates range bands around the selected token using the token HUD. 
@@ -8,6 +10,7 @@ Creates range bands around the selected token using the token HUD.
 
 ![activate range bands](https://github.com/user-attachments/assets/359f8b4d-332b-4340-b104-49395c49702c)
 
+**Update:** Moving the token automatically removes the range bands.
 
 ### Configuring Range Bands
 
@@ -44,9 +47,6 @@ The _Range Band Multiplier_ is used to change the size of the range bands on a p
 
 The drag ruler can show a narrative value such as "Short", "Close", "Not Far", "Really Far", etc instead of a numeric distance.
 
-<<<<<<< HEAD
-This module is based on the code by _Leogar_ on the Foundry VTT Discord Server.
-=======
 You can set the scene so that only narrative measurements are used, only numeric measurements are used, or both are used.
 
 If the drag ruler exceeds the last range the the distance is marked as _Range Exceeded_. 
