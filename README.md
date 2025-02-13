@@ -10,14 +10,13 @@ Creates range bands around the selected token using the token HUD.
 
 ![activate range bands](https://github.com/user-attachments/assets/359f8b4d-332b-4340-b104-49395c49702c)
 
+**Update:** Moving the token automatically removes the range bands.
 
 ### Configuring Range Bands
 
 Range Bands are configured in _Configure Settings_.
 
 <img src="https://github.com/user-attachments/assets/50bab889-9628-4aa6-986e-c8daf4e93d01" width=400 />
-
-**Update:** Moving the token automatically removes the range bands.
 
 Range bands are defined in the _Distance Configuration_ dialog. 
 
