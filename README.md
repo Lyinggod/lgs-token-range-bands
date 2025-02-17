@@ -8,7 +8,7 @@ Creates range bands around the selected token using the token HUD.
 
 ### Activating Range Bands
 
-<img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/show%20range%20bands.gif">
+<img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/show%20range%20bands.gif" width=500>
 
 **Update:** Moving the token automatically removes the range bands.
 
@@ -44,7 +44,7 @@ You can set the scene so that only narrative measurements are used, only numeric
 
 If the drag ruler exceeds the last range the the distance is marked as _Range Exceeded_. 
 
-<img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/drag%20bar%20example.gif">
+<img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/drag%20bar%20example.gif" width=500>
 
 ## Credits
 The range band code is baded on the code by _Leogar_ on the Foundry Vtt Discord Server.
