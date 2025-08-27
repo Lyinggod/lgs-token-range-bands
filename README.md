@@ -24,7 +24,7 @@ Range bands are defined in the _Distance Configuration_ dialog.
 
 The names are used to define text shown for the narrative drag ruler (see below) and the _Relative Range Distance_ is the relative distance between between the bands. These distances are also used by the drag ruler.
 
-_Drag Rule Approximation_ applies on to scenes with grid type _Square_. By default, Foundry appears to use Euclidean calculations when cacluating the drag ruler distance. This means that diagonal measurements are not the same straight line distance as straight up, down, left, or right measurements. This setting attempts to remove this desparity. The result is that diagonal measurements will not match to the number of square. The feature has limited use as diagnol measure meants are now straight line and now done by counting squares.
+_Drag Rule Approximation_ applies to scenes with grid type _Square_. By default, Foundry appears to use Euclidean calculations when cacluating the drag ruler distance. This means that diagonal measurements are not the same straight line distance as straight up, down, left, or right measurements. This setting attempts to remove this desparity. The result is that diagonal measurements will not match to the number of square. The feature has limited use as diagnol measuremeants are now use absolute distance and are not done by counting squares and using the center of square as the "snap=to" point.
 
 <img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/short%20range%20example.png" width=400>
 
@@ -32,7 +32,7 @@ _Drag Rule Approximation_ applies on to scenes with grid type _Square_. By defau
 
 ### Scene Configuration
 
-<img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/show%20range%20config.png" width=400>
+<img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/scene%20configure%20example.png" width=400>
 
 The _Range Band Multiplier_ is used to change the size of the range bands on a per scene basis depending on the scale of the map. It may need to be adjusted for each map.
 
@@ -47,7 +47,7 @@ If the drag ruler exceeds the last range the the distance is marked as _Range Ex
 <img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/drag%20bar%20example.gif" width=500>
 
 ## Credits
-The range band code is baded on the code by _Leogar_ on the Foundry Vtt Discord Server.
+The range band code is based on the code by _Leogar_ on the Foundry Vtt Discord Server.
 
 The narrative range bands were inspired by module _Roger's Additional Metric Ruler Labels_ by Roger92.
 
