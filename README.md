@@ -47,7 +47,7 @@ If the drag ruler exceeds the last range the the distance is marked as _Range Ex
 <img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/drag%20bar%20example.gif" width=500>
 
 ## Credits
-The range band code is baded on the code by _Leogar_ on the Foundry Vtt Discord Server.
+The range band code is based on the code by _Leogar_ on the Foundry Vtt Discord Server.
 
 The narrative range bands were inspired by module _Roger's Additional Metric Ruler Labels_ by Roger92.
 
