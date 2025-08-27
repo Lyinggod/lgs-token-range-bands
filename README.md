@@ -32,7 +32,7 @@ _Drag Rule Approximation_ applies on to scenes with grid type _Square_. By defau
 
 ### Scene Configuration
 
-<img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/show%20range%20config.png" width=400>
+<img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/scene%20configure%20example.png" width=400>
 
 The _Range Band Multiplier_ is used to change the size of the range bands on a per scene basis depending on the scale of the map. It may need to be adjusted for each map.
 
