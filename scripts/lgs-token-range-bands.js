@@ -40,7 +40,7 @@ Hooks.once("init", () => {
     type: DistanceConfigApp,
     restricted: true
   });
-  
+
   game.settings.register("lgs-token-range-bands", "dragRulerApproximation", {
     name: "Drag Ruler Approximation",
     hint: "When grid type is 'square' attempts to compensate for system Euclidean calculations so that drag ruler approximates range bands on diagonal measurements. This has no effect if scene grid type is not 'Square'.",
@@ -51,7 +51,6 @@ Hooks.once("init", () => {
   });
 
   // ----------------- Socket Integration -----------------
-  // All multiplier changes are sent via socket so that there is one authoritative update.
   game.socket.on("module.lgs-token-range-bands", async (data) => {
     // (Avoid processing our own socket message.)
     if (data.senderId === game.user.id) return;
@@ -71,12 +70,20 @@ Hooks.once("init", () => {
           senderId: game.user.id
         });
       }
-    }
-    // When multiplierUpdated is received, force a redraw of the scene so that measured templates (and drag ruler) re-read the flag.
-    else if (data.action === "multiplierUpdated") {
+    } else if (data.action === "multiplierUpdated") {
       if (canvas.scene && canvas.scene.id === data.sceneId) {
         // A redraw causes the range bands to be recalculated on next use.
         canvas.draw();
+      }
+    } else if (data.action === "deleteTemplates" && game.user.isGM) {
+      // GM-only action to delete templates by their IDs.
+      const scene = game.scenes.get(data.sceneId);
+      if (scene) {
+        // Filter out IDs that might already have been deleted to prevent errors.
+        const existingTemplateIds = data.templateIds.filter(id => scene.templates.has(id));
+        if (existingTemplateIds.length > 0) {
+          await scene.deleteEmbeddedDocuments("MeasuredTemplate", existingTemplateIds);
+        }
       }
     }
   });
@@ -137,20 +144,20 @@ Hooks.once("init", () => {
           }
         }
       }
-      
+
       // set color if range exceeded
-      if (narrativeLabel == "Range Exceeded" ) {
+      if (narrativeLabel == "Range Exceeded") {
         args[0].label._tintRGB = 721024; // dark red
         narrativeLabel = exceedsRangeMessage;
       } else {
-        args[0].label._tintRGB = 16777215;  // white
+        args[0].label._tintRGB = 16777215; // white
       }
-      
+
       // Return the label based on the measurement option.
       // "narrative"  => Narrative Drag Ruler Only (narrative text only)
       // "addToMeasurements" => Add to Measurements (numeric + narrative)
       // "numeric"    => Only Numeric Measurements Only (numeric only)
-      switch(measurementOption) {
+      switch (measurementOption) {
         case "addToMeasurements":
           return `${originalLabel}\n${narrativeLabel}`;
         case "numeric":
@@ -249,9 +256,9 @@ class DistanceConfigApp extends FormApplication {
     html.find('.reset-ranges').click(ev => {
       // Define the default ranges.
       const defaultRanges = [
-        { name: "Short Range",   distance: 2 },
-        { name: "Medium Range",  distance: 5 },
-        { name: "Long Range",    distance: 10 },
+        { name: "Short Range", distance: 2 },
+        { name: "Medium Range", distance: 5 },
+        { name: "Long Range", distance: 10 },
         { name: "Extreme Range", distance: 20 }
       ];
       // Remove all rows except the header (assumed to be the first .distance-row).
@@ -330,7 +337,7 @@ Hooks.on("renderSceneConfig", (app, html, data) => {
     // Regardless of whether the current GM has update permission, any change
     // to the multiplier input sends a socket event so that the designated GM
     // (scene owner) can update the flag.
-    rangeBandMultiplierDiv.find('input[name="flags.lgs-token-range-bands.rangeBandMultiplier"]').on('change', function(ev) {
+    rangeBandMultiplierDiv.find('input[name="flags.lgs-token-range-bands.rangeBandMultiplier"]').on('change', function (ev) {
       ev.preventDefault();
       const newMultiplier = Number($(this).val());
       game.socket.emit("module.lgs-token-range-bands", {
@@ -395,12 +402,17 @@ Hooks.on("renderTokenHUD", (hud, html, tokenData) => {
     );
 
     if (existing.length > 0) {
-      // If range bands are already active, only allow a GM to turn them off.
+      const ids = existing.map(t => t.id);
+      // Player requests deletion via socket, GM deletes directly.
       if (game.user.isGM) {
-        const ids = existing.map(t => t.id);
         await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", ids);
       } else {
-        ui.notifications.warn("Only a GM can turn off range bands.");
+        game.socket.emit("module.lgs-token-range-bands", {
+          action: "deleteTemplates",
+          templateIds: ids,
+          sceneId: canvas.scene.id,
+          senderId: game.user.id
+        });
       }
       return;
     }
@@ -455,16 +467,36 @@ Hooks.on("renderTokenHUD", (hud, html, tokenData) => {
 
 // =============== Remove Range Band Templates When a Token Moves ===============
 Hooks.on("updateToken", async (tokenDocument, updateData, options, userId) => {
+  // Only the primary GM should handle the deletion to avoid race conditions and permission errors.
+  if (!game.user.isGM) return;
+
   // Only act if the token's position changes.
   const positionChanged = ("x" in updateData) || ("y" in updateData);
   if (!positionChanged) return;
 
-  // Find all range-band templates tied to this token.
+  // Find all range-band templates tied to this token on the current scene.
   const existingTemplates = canvas.scene.templates.filter(t =>
     t.flags["lgs-token-range-bands"]?.tokenId === tokenDocument.id
   );
   if (!existingTemplates.length) return;
 
   // Delete the templates.
-  await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", existingTemplates.map(t => t.id));
+  const idsToDelete = existingTemplates.map(t => t.id);
+  await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", idsToDelete);
+});
+
+// =============== Remove Range Band Templates When a Token is Deleted ===============
+Hooks.on("deleteToken", async (tokenDocument, options, userId) => {
+  // Only the primary GM should handle the deletion to avoid race conditions.
+  if (!game.user.isGM) return;
+
+  // Find all range-band templates tied to this token on the current scene.
+  const existingTemplates = canvas.scene.templates.filter(t =>
+    t.flags["lgs-token-range-bands"]?.tokenId === tokenDocument.id
+  );
+  if (!existingTemplates.length) return;
+
+  // Delete the templates.
+  const idsToDelete = existingTemplates.map(t => t.id);
+  await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", idsToDelete);
 });
