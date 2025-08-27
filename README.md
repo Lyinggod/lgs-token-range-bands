@@ -24,7 +24,7 @@ Range bands are defined in the _Distance Configuration_ dialog.
 
 The names are used to define text shown for the narrative drag ruler (see below) and the _Relative Range Distance_ is the relative distance between between the bands. These distances are also used by the drag ruler.
 
-_Drag Rule Approximation_ applies on to scenes with grid type _Square_. By default, Foundry appears to use Euclidean calculations when cacluating the drag ruler distance. This means that diagonal measurements are not the same straight line distance as straight up, down, left, or right measurements. This setting attempts to remove this desparity. The result is that diagonal measurements will not match to the number of square. The feature has limited use as diagnol measure meants are now straight line and now done by counting squares.
+_Drag Rule Approximation_ applies to scenes with grid type _Square_. By default, Foundry appears to use Euclidean calculations when cacluating the drag ruler distance. This means that diagonal measurements are not the same straight line distance as straight up, down, left, or right measurements. This setting attempts to remove this desparity. The result is that diagonal measurements will not match to the number of square. The feature has limited use as diagnol measuremeants are now use absolute distance and are not done by counting squares and using the center of square as the "snap=to" point.
 
 <img src="https://github.com/Lyinggod/lgs-token-range-bands/blob/main/images/short%20range%20example.png" width=400>
 
